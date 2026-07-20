@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JudoCoach AI — Evidence-Based Judo Research Assistant</title>
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- ============ Sidebar ============ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 18 L12 6 L18 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="20" r="1.6" fill="currentColor"/></svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-title">JudoCoach AI</div>
+          <div class="brand-subtitle">EvidenceOps Agent</div>
+        </div>
+      </div>
+
+      <button class="btn-new-chat" data-action="new-chat">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        New Conversation
+      </button>
+
+      <div class="nav-section-label">Workspace</div>
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="home">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7M5 10v10h14V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Home
+        </button>
+        <button class="nav-item" data-view="chat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4v8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Chat
+        </button>
+        <button class="nav-item" data-view="knowledge-base">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 5.5v15" stroke="currentColor" stroke-width="1.8"/></svg>
+          Knowledge Base
+        </button>
+        <button class="nav-item" data-view="reports">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 3h8l4 4v14H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 12h6M10 16h6M10 8h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Reports
+        </button>
+        <button class="nav-item" data-view="dashboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" data-view="about">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5M12 7.5v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          About
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle" data-action="toggle-theme">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span data-el="theme-label">Light mode</span>
+        </button>
+        <span>LlamaIndex Bootcamp Project</span>
+      </div>
+    </aside>
+
+    <!-- ============ Main column ============ -->
+    <div class="main-column">
+      <header class="top-bar">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <button class="mobile-nav-toggle" data-action="toggle-sidebar" aria-label="Toggle navigation">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <span class="top-bar-title" data-el="view-title">Home</span>
+        </div>
+        <div class="status-strip" id="status-strip">
+          <span class="status-pill"><span class="status-dot" data-status="api"></span><span>API</span></span>
+          <span class="status-pill"><span class="status-dot" data-status="kb"></span><span data-el="kb-status-label">Knowledge Base</span></span>
+          <span class="status-pill"><span class="status-dot" data-status="index"></span><span>Vector Index</span></span>
+          <span class="status-pill"><span class="status-dot" data-status="model"></span><span data-el="model-status-label">Model</span></span>
+        </div>
+      </header>
+
+      <div class="view-container">
+
+        <!-- ============ Home view ============ -->
+        <section class="view active" id="view-home">
+          <div class="hero">
+            <span class="hero-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Evidence-grounded &middot; Human-approved &middot; Fully audited
+            </span>
+            <h1>Your Judo research assistant.</h1>
+            <p class="hero-subtitle">
+              JudoCoach AI searches a private, indexed knowledge base before answering,
+              separates evidence from inference, and never saves a report without your
+              explicit approval.
+            </p>
+            <div class="suggested-chips">
+              <button class="chip" data-action="ask" data-question="What is O Soto Gari?">What is O Soto Gari?</button>
+              <button class="chip" data-action="ask" data-question="Explain Kuzushi.">Explain Kuzushi.</button>
+              <button class="chip" data-action="ask" data-question="How can I improve grip strength?">How can I improve grip strength?</button>
+              <button class="chip" data-action="ask" data-question="How do I fight a taller opponent?">How do I fight a taller opponent?</button>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" stroke="currentColor" stroke-width="1.8"/></svg></div>
+              <h3>Evidence-grounded</h3>
+              <p>Every factual answer is retrieved from the indexed knowledge base first, not invented.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Human approval gate</h3>
+              <p>The save capability does not exist until you approve — not just a polite instruction.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4v16h16M8 15l3-4 3 3 4-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Full audit trail</h3>
+              <p>Every consequential action is logged with a correlated report ID you can review.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h3>Bounded execution</h3>
+              <p>Tool calls are capped per request so the agent can never loop indefinitely.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ Chat view ============ -->
+        <section class="view" id="view-chat">
+          <div class="chat-shell">
+            <div class="chat-messages" id="chat-messages">
+              <div class="chat-empty" id="chat-empty">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4v8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <p>Ask your first Judo question to get started.</p>
+              </div>
+            </div>
+            <form class="chat-input-bar" id="chat-form">
+              <textarea
+                id="chat-input"
+                rows="1"
+                placeholder="Ask about techniques, rules, strategy, training, or injuries…"
+                aria-label="Research question"
+              ></textarea>
+              <button type="submit" class="btn-send" id="chat-send" aria-label="Send question">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 12l16-8-6 8 6 8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              </button>
+            </form>
+            <div class="field-error" id="chat-field-error">Please enter between 10 and 2000 characters.</div>
+          </div>
+        </section>
+
+        <!-- ============ Knowledge Base view ============ -->
+        <section class="view" id="view-knowledge-base">
+          <div class="section-heading">
+            <div>
+              <h2>Knowledge Base</h2>
+              <p>The indexed documents JudoCoach AI can search before answering.</p>
+            </div>
+          </div>
+          <div class="kb-grid" id="kb-grid">
+            <div class="skeleton" style="height:140px;"></div>
+            <div class="skeleton" style="height:140px;"></div>
+            <div class="skeleton" style="height:140px;"></div>
+          </div>
+        </section>
+
+        <!-- ============ Reports view ============ -->
+        <section class="view" id="view-reports">
+          <div class="section-heading">
+            <div>
+              <h2>Saved Reports</h2>
+              <p>Reports you have approved and saved from research sessions.</p>
+            </div>
+          </div>
+          <div id="reports-list"></div>
+        </section>
+
+        <!-- ============ Dashboard view ============ -->
+        <section class="view" id="view-dashboard">
+          <div class="section-heading">
+            <div>
+              <h2>Dashboard</h2>
+              <p>Real, measured system state — nothing here is estimated.</p>
+            </div>
+          </div>
+          <div class="stat-grid" id="stat-grid">
+            <div class="skeleton" style="height:92px;"></div>
+            <div class="skeleton" style="height:92px;"></div>
+            <div class="skeleton" style="height:92px;"></div>
+          </div>
+          <div class="section-heading"><div><h2 style="font-size:16px;">Recent Activity</h2></div></div>
+          <div class="activity-list" id="activity-list"></div>
+        </section>
+
+        <!-- ============ About view ============ -->
+        <section class="view" id="view-about">
+          <div class="section-heading"><div><h2>About JudoCoach AI</h2></div></div>
+          <div class="feature-grid" style="grid-template-columns: 1fr;">
+            <div class="feature-card">
+              <h3>What this is</h3>
+              <p style="margin-top:8px;">
+                JudoCoach AI is a governed research agent built with LlamaIndex and FastAPI.
+                It retrieves evidence from a private knowledge base, uses a bounded set of
+                tools, and requires explicit human approval before persisting any report.
+              </p>
+            </div>
+            <div class="feature-card">
+              <h3>How approval works</h3>
+              <p style="margin-top:8px;">
+                Every question first runs as a draft with no ability to save. Only after you
+                click "Approve &amp; Save" does the agent run again with the save capability
+                present — the tool itself is absent beforehand, not just discouraged by
+                instruction.
+              </p>
+            </div>
+            <div class="feature-card">
+              <h3>Limitations</h3>
+              <p style="margin-top:8px;">
+                Small, single-domain knowledge base. No image or video understanding. Retrieval
+                uses a single chunking configuration. See the project README for the full list.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Approval modal ============ -->
+  <div class="modal-overlay" id="approval-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="approval-modal-title">
+      <div class="modal-icon warn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01M10.3 3.9L2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 id="approval-modal-title">Save this report?</h3>
+      <p>The draft above was produced with no ability to save. Approving will re-run the
+        request with the save tool enabled and record an audit event.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-action="dismiss-approval">Discard</button>
+        <button class="btn btn-primary" data-action="confirm-approval">Approve &amp; Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Report viewer modal ============ -->
+  <div class="modal-overlay" id="report-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="report-modal-title">
+      <div class="modal-icon info">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 3h8l4 4v14H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 id="report-modal-title">Report</h3>
+      <pre id="report-modal-content"></pre>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-action="close-report-modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
