@@ -101,7 +101,15 @@
   function inlineMarkdown(text) {
     return text
       .replace(/`([^`]+)`/g, "<code>$1</code>")
-      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(
+        /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s<)]+)/g,
+        (match, linkText, linkUrl, bareUrl) => {
+          const url = linkUrl || bareUrl;
+          const label = linkText || bareUrl;
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+        }
+      );
   }
 
   function formatTime(date) {

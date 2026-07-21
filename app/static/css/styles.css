@@ -699,6 +699,17 @@ img, svg { display: block; }
 }
 .message-row.user .bubble code { background: rgba(255,255,255,0.2); }
 
+.bubble a {
+  color: var(--color-indigo);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-word;
+}
+.bubble a:hover { color: var(--color-primary); }
+.message-row.user .bubble a { color: #fff; text-decoration-color: rgba(255,255,255,0.6); }
+.message-row.user .bubble a:hover { text-decoration-color: #fff; }
+
 .status-badge {
   display: inline-flex;
   align-items: center;
