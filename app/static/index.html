@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>JudoCoach AI — Evidence-Based Judo Research Assistant</title>
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Shippori+Mincho:wght@400;600;700&family=Yuji+Syuku&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/static/css/styles.css" />
 </head>
 <body>
@@ -31,27 +34,27 @@
       <nav class="nav-list">
         <button class="nav-item active" data-view="home">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7M5 10v10h14V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Home
+          🥋 Home
         </button>
         <button class="nav-item" data-view="chat">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4v8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Chat
+          💬 AI Coach
         </button>
         <button class="nav-item" data-view="knowledge-base">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 5.5v15" stroke="currentColor" stroke-width="1.8"/></svg>
-          Knowledge Base
+          📚 Knowledge Base
         </button>
         <button class="nav-item" data-view="reports">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 3h8l4 4v14H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 12h6M10 16h6M10 8h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          Reports
+          📄 Reports
         </button>
         <button class="nav-item" data-view="dashboard">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          Dashboard
+          ⚙ Dashboard
         </button>
         <button class="nav-item" data-view="about">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5M12 7.5v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          About
+          👤 About
         </button>
       </nav>
 
@@ -60,6 +63,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
           <span data-el="theme-label">Light mode</span>
         </button>
+        <div class="kanji-mark">精力善用 · 自他共栄</div>
         <span>LlamaIndex Bootcamp Project</span>
       </div>
     </aside>
@@ -86,21 +90,52 @@
         <!-- ============ Home view ============ -->
         <section class="view active" id="view-home">
           <div class="hero">
-            <span class="hero-badge">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Evidence-grounded &middot; Human-approved &middot; Fully audited
-            </span>
-            <h1>Your Judo research assistant.</h1>
-            <p class="hero-subtitle">
-              JudoCoach AI searches a private, indexed knowledge base before answering,
-              separates evidence from inference, and never saves a report without your
-              explicit approval.
-            </p>
-            <div class="suggested-chips">
-              <button class="chip" data-action="ask" data-question="What is O Soto Gari?">What is O Soto Gari?</button>
-              <button class="chip" data-action="ask" data-question="Explain Kuzushi.">Explain Kuzushi.</button>
-              <button class="chip" data-action="ask" data-question="How can I improve grip strength?">How can I improve grip strength?</button>
-              <button class="chip" data-action="ask" data-question="How do I fight a taller opponent?">How do I fight a taller opponent?</button>
+            <span class="hero-kanji-watermark" aria-hidden="true">柔道</span>
+            <div class="hero-copy">
+              <span class="hero-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Evidence-grounded &middot; Human-approved &middot; Fully audited
+              </span>
+              <h1>柔道コーチ AI</h1>
+              <span class="hero-title-en">JudoCoach AI &mdash; Evidence-Based AI Coaching Assistant</span>
+              <p class="hero-subtitle">
+                JudoCoach AI searches a private, indexed knowledge base before answering,
+                separates evidence from inference, and never saves a report without your
+                explicit approval &mdash; the discipline of the dojo, applied to research.
+              </p>
+              <div class="belt-divider" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="suggested-chips">
+                <button class="chip" data-action="ask" data-question="What is O Soto Gari?">What is O Soto Gari?</button>
+                <button class="chip" data-action="ask" data-question="Explain Kuzushi.">Explain Kuzushi.</button>
+                <button class="chip" data-action="ask" data-question="How can I improve grip strength?">How can I improve grip strength?</button>
+                <button class="chip" data-action="ask" data-question="How do I fight a taller opponent?">How do I fight a taller opponent?</button>
+              </div>
+            </div>
+            <div class="hero-illustration" aria-hidden="true">
+              <span class="enso-ring"></span>
+              <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Line-art Judo throw (tori executing O Soto Gari on uke) -->
+                <g stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                  <!-- Tori (standing) -->
+                  <circle cx="72" cy="46" r="12" />
+                  <path d="M72 58 L70 100 L52 128" />
+                  <path d="M70 100 L94 118" />
+                  <path d="M70 78 L40 92" />
+                  <path d="M70 78 L104 70" />
+                  <path d="M52 128 L44 158" />
+                  <path d="M52 128 L66 156" />
+                  <!-- Uke (falling) -->
+                  <circle cx="150" cy="100" r="11" />
+                  <path d="M150 111 L128 130 L96 132" />
+                  <path d="M128 130 L146 150" />
+                  <path d="M128 130 L112 108" />
+                  <path d="M96 132 L70 118" />
+                  <path d="M96 132 L84 156" />
+                </g>
+                <path d="M20 190 Q100 178 180 190" stroke="currentColor" stroke-width="2" opacity="0.35" />
+              </svg>
             </div>
           </div>
 
@@ -133,6 +168,7 @@
           <div class="chat-shell">
             <div class="chat-messages" id="chat-messages">
               <div class="chat-empty" id="chat-empty">
+                <div class="kanji-eyebrow">柔道</div>
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4v8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <p>Ask your first Judo question to get started.</p>
               </div>
@@ -156,14 +192,13 @@
         <section class="view" id="view-knowledge-base">
           <div class="section-heading">
             <div>
+              <div class="kanji-eyebrow">図書館</div>
               <h2>Knowledge Base</h2>
               <p>The indexed documents JudoCoach AI can search before answering.</p>
             </div>
           </div>
           <div class="kb-grid" id="kb-grid">
-            <div class="skeleton" style="height:140px;"></div>
-            <div class="skeleton" style="height:140px;"></div>
-            <div class="skeleton" style="height:140px;"></div>
+            <div class="enso-spinner" style="grid-column:1/-1; margin:40px auto;"></div>
           </div>
         </section>
 
@@ -171,33 +206,33 @@
         <section class="view" id="view-reports">
           <div class="section-heading">
             <div>
+              <div class="kanji-eyebrow">記録</div>
               <h2>Saved Reports</h2>
               <p>Reports you have approved and saved from research sessions.</p>
             </div>
           </div>
-          <div id="reports-list"></div>
+          <div id="reports-list"><div class="enso-spinner" style="margin:40px auto;"></div></div>
         </section>
 
         <!-- ============ Dashboard view ============ -->
         <section class="view" id="view-dashboard">
           <div class="section-heading">
             <div>
+              <div class="kanji-eyebrow">道場</div>
               <h2>Dashboard</h2>
               <p>Real, measured system state — nothing here is estimated.</p>
             </div>
           </div>
           <div class="stat-grid" id="stat-grid">
-            <div class="skeleton" style="height:92px;"></div>
-            <div class="skeleton" style="height:92px;"></div>
-            <div class="skeleton" style="height:92px;"></div>
+            <div class="enso-spinner" style="grid-column:1/-1; margin:20px auto;"></div>
           </div>
           <div class="section-heading"><div><h2 style="font-size:16px;">Recent Activity</h2></div></div>
-          <div class="activity-list" id="activity-list"></div>
+          <div class="activity-list" id="activity-list"><div class="enso-spinner" style="margin:20px auto;"></div></div>
         </section>
 
         <!-- ============ About view ============ -->
         <section class="view" id="view-about">
-          <div class="section-heading"><div><h2>About JudoCoach AI</h2></div></div>
+          <div class="section-heading"><div><div class="kanji-eyebrow">概要</div><h2>About JudoCoach AI</h2></div></div>
           <div class="feature-grid" style="grid-template-columns: 1fr;">
             <div class="feature-card">
               <h3>What this is</h3>
@@ -227,6 +262,12 @@
         </section>
 
       </div>
+
+      <footer class="app-footer">
+        <div class="footer-divider"><span>&#9679;</span></div>
+        <div class="footer-title">JudoCoach AI</div>
+        <div class="footer-tagline">Built with LlamaIndex &amp; OpenAI</div>
+      </footer>
     </div>
   </div>
 

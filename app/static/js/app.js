@@ -32,6 +32,23 @@
     default: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
   };
 
+  /* Tasteful belt-color accents per knowledge base category — decoration only. */
+  const KB_ACCENTS = {
+    techniques: "var(--belt-blue)",
+    rules: "var(--belt-black)",
+    strategy: "var(--belt-brown)",
+    training: "var(--belt-green)",
+    injuries: "var(--color-primary)",
+    glossary: "var(--belt-orange)",
+    faq: "var(--belt-yellow)",
+    default: "var(--color-primary)",
+  };
+
+  function accentFor(fileName) {
+    const key = Object.keys(KB_ACCENTS).find((k) => fileName.includes(k));
+    return KB_ACCENTS[key] || KB_ACCENTS.default;
+  }
+
   /* --------------------------------------------------
      DOM helpers
   -------------------------------------------------- */
@@ -443,7 +460,7 @@
       }
 
       grid.innerHTML = data.documents.map((doc) => `
-        <div class="kb-card">
+        <div class="kb-card" style="--kb-accent:${accentFor(doc.file_name)};">
           <div class="kb-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none">${iconFor(doc.file_name)}</svg></div>
           <h3>${escapeHtml(doc.title)}</h3>
           <p>${escapeHtml(doc.description)}</p>
@@ -470,33 +487,72 @@
       }
 
       list.innerHTML = data.reports.map((r) => `
-        <div class="report-row" data-action="open-report" data-name="${escapeHtml(r.name)}">
-          <div>
+        <div class="report-row" data-name="${escapeHtml(r.name)}">
+          <div data-action="open-report" data-name="${escapeHtml(r.name)}" style="cursor:pointer; flex:1;">
             <div class="report-title">${escapeHtml(r.name.replace(/_/g, " "))}</div>
             <div class="report-preview">${escapeHtml(r.preview)}</div>
           </div>
-          <div class="report-meta">${r.report_id ? `#${escapeHtml(r.report_id)} · ` : ""}${timeAgo(r.saved_at)}</div>
+          <div class="report-meta">
+            ${new Date(r.saved_at * 1000).toLocaleDateString()}<br>
+            ${r.report_id ? `#${escapeHtml(r.report_id)} · ` : ""}${timeAgo(r.saved_at)}
+          </div>
+          <div class="report-actions">
+            <button class="btn btn-ghost" data-action="open-report" data-name="${escapeHtml(r.name)}">View</button>
+            <button class="btn btn-ghost" data-action="download-report" data-name="${escapeHtml(r.name)}">Download</button>
+          </div>
         </div>
       `).join("");
 
       $all("[data-action='open-report']").forEach((el) => {
-        el.addEventListener("click", () => openReportModal(el.dataset.name));
+        el.addEventListener("click", (event) => {
+          event.stopPropagation();
+          openReportModal(el.dataset.name);
+        });
+      });
+      $all("[data-action='download-report']").forEach((el) => {
+        el.addEventListener("click", (event) => {
+          event.stopPropagation();
+          downloadReport(el.dataset.name);
+        });
       });
     } catch {
       list.innerHTML = errorBannerHtml("Could not load saved reports.");
     }
   }
 
+  async function fetchReport(name) {
+    const res = await fetch(`/reports/${encodeURIComponent(name)}`);
+    if (!res.ok) throw new Error("not found");
+    return res.json();
+  }
+
   async function openReportModal(name) {
     try {
-      const res = await fetch(`/reports/${encodeURIComponent(name)}`);
-      if (!res.ok) throw new Error("not found");
-      const data = await res.json();
+      const data = await fetchReport(name);
       $("#report-modal-title").textContent = data.name.replace(/_/g, " ");
       $("#report-modal-content").textContent = data.content;
       $("#report-modal").classList.add("open");
     } catch {
       showToast("Could not open that report.", "error");
+    }
+  }
+
+  /** Client-side only: reuses the already-exposed GET /reports/{name} content
+   * and saves it as a file via a Blob URL. No new backend endpoint required. */
+  async function downloadReport(name) {
+    try {
+      const data = await fetchReport(name);
+      const blob = new Blob([data.content], { type: "text/markdown" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${name}.md`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      showToast("Could not download that report.", "error");
     }
   }
 
